@@ -1,4 +1,4 @@
-package com.thoughtworks.todo;
+package com.thoughtworks;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

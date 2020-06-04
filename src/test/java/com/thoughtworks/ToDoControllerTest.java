@@ -1,5 +1,7 @@
-package com.thoughtworks.todo;
+package com.thoughtworks;
 
+import com.thoughtworks.todo.ToDo;
+import com.thoughtworks.todo.ToDoService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
