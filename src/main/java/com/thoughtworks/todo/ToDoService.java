@@ -14,6 +14,10 @@ public class ToDoService {
     }
 
     public List<ToDo> getAllToDos() {
-        return null;
+        return toDoRepository.findAll();
+    }
+
+    public ToDo addTodo(ToDo toDo) {
+        return toDoRepository.save(toDo);
     }
 }
