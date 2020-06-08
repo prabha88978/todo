@@ -19,8 +19,7 @@ import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -62,5 +61,22 @@ public class ToDoControllerTest {
 
         result.andExpect(jsonPath("$.text").value("Write dairy daily"))
                 .andExpect(jsonPath("$.completed").value(true));
+    }
+
+    @Test
+    void testShouldUpdateTheToDOBasedOnId() throws Exception {
+        ToDo writeTodo = new ToDo(1L, "Eat three times daily", false);
+        when(toDoService.updateToDoById(any(Long.class), any(ToDo.class))).thenReturn(writeTodo);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String writeToDoJSON = objectMapper.writeValueAsString(writeTodo);
+
+        ResultActions result = mockMvc.perform(put("/todos/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(writeToDoJSON)
+        );
+
+        result.andExpect(jsonPath("$.id").value(1L))
+                .andExpect(jsonPath("$.text").value("Eat three times daily"))
+                .andExpect(jsonPath("$.completed").value(false));
     }
 }

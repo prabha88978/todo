@@ -20,4 +20,8 @@ public class ToDoService {
     public ToDo addTodo(ToDo toDo) {
         return toDoRepository.save(toDo);
     }
+
+    public ToDo updateToDoById(Long id, ToDo toDo) {
+        return null;
+    }
 }
