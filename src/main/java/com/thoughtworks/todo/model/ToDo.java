@@ -1,4 +1,4 @@
-package com.thoughtworks.todo;
+package com.thoughtworks.todo.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

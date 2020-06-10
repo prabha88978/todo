@@ -1,5 +1,7 @@
-package com.thoughtworks.todo;
+package com.thoughtworks.todo.service;
 
+import com.thoughtworks.todo.model.ToDo;
+import com.thoughtworks.todo.repository.ToDoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +24,10 @@ public class ToDoService {
     }
 
     public ToDo updateToDoById(Long id, ToDo toDo) {
-        return null;
+        return toDoRepository.save(toDo);
+    }
+
+    public void deleteToDoById(Long id) {
+        toDoRepository.deleteById(id);
     }
 }

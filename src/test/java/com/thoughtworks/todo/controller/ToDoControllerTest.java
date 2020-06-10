@@ -1,8 +1,8 @@
-package com.thoughtworks;
+package com.thoughtworks.todo.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.thoughtworks.todo.ToDo;
-import com.thoughtworks.todo.ToDoService;
+import com.thoughtworks.todo.model.ToDo;
+import com.thoughtworks.todo.service.ToDoService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -78,5 +78,14 @@ public class ToDoControllerTest {
         result.andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.text").value("Eat three times daily"))
                 .andExpect(jsonPath("$.completed").value(false));
+    }
+
+    @Test
+    void testShouldDeleteTheToDoBasedOnId() throws Exception {
+        mockMvc.perform(delete("/todos/1")
+                .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        verify(toDoService, times(1)).deleteToDoById(1L);
     }
 }

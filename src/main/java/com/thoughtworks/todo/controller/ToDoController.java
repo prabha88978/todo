@@ -1,5 +1,7 @@
-package com.thoughtworks.todo;
+package com.thoughtworks.todo.controller;
 
+import com.thoughtworks.todo.model.ToDo;
+import com.thoughtworks.todo.service.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,5 +25,10 @@ public class ToDoController {
     @RequestMapping(method = RequestMethod.PUT, value = "/todos/{id}")
     public ToDo updateToDoById(@RequestBody ToDo toDo, @PathVariable Long id) {
         return toDoService.updateToDoById(id, toDo);
+    }
+
+    @DeleteMapping("/todos/{id}")
+    public void deleteToDoBasedOnId(@PathVariable Long id) {
+        toDoService.deleteToDoById(id);
     }
 }
